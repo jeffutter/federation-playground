@@ -1,0 +1,22 @@
+# Rust
+/target
+**/target
+
+# WASM build output
+crates/gql-core/pkg/
+web/src/wasm/
+
+# Node / web
+node_modules/
+web/dist/
+web/node_modules/
+
+# direnv / nix
+.direnv/
+
+# editor / OS
+.DS_Store
+*.swp
+
+# local Claude settings
+.claude/settings.local.json

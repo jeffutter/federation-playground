@@ -1,0 +1,35 @@
+[package]
+name = "gql-core"
+version = "0.1.0"
+edition.workspace = true
+license.workspace = true
+rust-version.workspace = true
+description = "WASM GraphQL core: validate, compose, plan, mock-execute"
+
+[lib]
+# cdylib: the wasm artifact for the browser. rlib: so native `cargo test` can
+# unit-test the internal modules directly.
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+wasm-bindgen = "0.2"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+console_error_panic_hook = "0.1"
+
+# --- Apollo GraphQL ---------------------------------------------------------
+# Pinned EXACT. apollo-federation has NO semver guarantees (Apollo treats it as
+# Router-internal), so any version may break the API. These are wired up in
+# Spike 0 — uncomment, then prove they compile to wasm32 and that compose()
+# runs in a browser. Versions confirmed latest as of 2026-06-06.
+#
+# apollo-compiler = "=1.32.0"
+# apollo-federation = "=2.15.0"
+#
+# The usual wasm fix when a transitive dep needs randomness: enable getrandom's
+# JS backend. Uncomment if Spike 0 surfaces a getrandom build error.
+# getrandom = { version = "0.2", features = ["js"] }
+
+[dev-dependencies]
+wasm-bindgen-test = "0.3"
+insta = { version = "1", features = ["json"] }

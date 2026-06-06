@@ -1,0 +1,16 @@
+[workspace]
+resolver = "2"
+members = ["crates/gql-core"]
+
+[workspace.package]
+edition = "2021"
+license = "MIT"
+rust-version = "1.82"
+
+# Optimize wasm for size in release.
+[profile.release]
+opt-level = "z"
+lto = true
+codegen-units = 1
+panic = "abort"
+strip = true
